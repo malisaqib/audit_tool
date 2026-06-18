@@ -9,12 +9,17 @@ let cached: SupabaseClient | null = null;
 export function getSupabaseAdmin(): SupabaseClient {
   if (cached) return cached;
 
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  // URL is not secret, so accept the NEXT_PUBLIC_ name too for convenience.
+  const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+  // Key MUST be a server-side secret (service-role / "secret" key). We do NOT
+  // read a NEXT_PUBLIC_ / publishable key here — that key can't bypass RLS and
+  // shouldn't be trusted for writes.
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_SECRET_KEY;
 
   if (!url || !key) {
     throw new Error(
-      "Supabase is not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY to .env.local and restart the dev server."
+      "Supabase is not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (the secret key) to .env.local and restart the dev server."
     );
   }
 
