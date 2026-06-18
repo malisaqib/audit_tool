@@ -214,22 +214,22 @@ function scoreTrust(p: ExtractedProduct): CategoryScore {
     {
       test: /\b(returns?|refunds?|money[- ]back)\b/,
       missing:
-        "No return/refund language — reassure buyers they can send it back.",
+        "No return or refund info on this product page. Buyers often look for it right here before buying, even if it exists elsewhere on your store.",
     },
     {
       test: /\b(warrant(y|ies)|guarantee[d]?)\b/,
       missing:
-        "No warranty/guarantee language — a guarantee lowers perceived risk.",
+        "No warranty or guarantee mentioned on this product page. Adding it here lowers perceived risk.",
     },
     {
       test: /\b(shipping|free ship\w*|delivery|ships?\b|dispatch)\b/,
       missing:
-        "No shipping/delivery info — buyers want to know cost and speed before buying.",
+        "No shipping or delivery info on this product page. Surfacing it here reduces pre-purchase hesitation.",
     },
     {
       test: /\b(authentic\w*|genuine|original|certified|official)\b/,
       missing:
-        "No authenticity language — \"genuine\"/\"certified\" wording builds confidence.",
+        "No authenticity or genuine-product wording on this product page. It helps build buyer confidence at the point of decision.",
     },
   ];
 
